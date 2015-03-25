@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fourpool.thesetup" >
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:name=".TheSetupApp"
+        android:theme="@style/AppTheme" >
+
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="8b0bc3d6b94a8b7f695c013fbf3eb809c51e0179" />
+
+        <activity
+            android:name=".InterviewsActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".InterviewActivity"
+            android:label="@string/app_name" >
+        </activity>
+    </application>
+
+</manifest>

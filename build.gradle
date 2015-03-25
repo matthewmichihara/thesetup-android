@@ -1,0 +1,17 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'http://download.crashlytics.com/maven' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.16.0'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}

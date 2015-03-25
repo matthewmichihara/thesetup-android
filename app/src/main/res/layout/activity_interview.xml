@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionGroup="true"
+    >
+
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:minHeight="?attr/actionBarSize"
+      android:background="?attr/colorPrimary"
+      />
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+      <ImageView
+          android:id="@+id/image"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:adjustViewBounds="true"
+          android:scaleType="fitCenter"
+          />
+
+      <LinearLayout
+          android:id="@+id/description"
+          android:layout_height="wrap_content"
+          android:layout_width="match_parent"
+          android:layout_marginBottom="8dp"
+          android:background="@color/dark_grey"
+          android:orientation="vertical"
+          android:padding="8dp"
+          >
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="match_parent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorPrimary"
+            />
+      </LinearLayout>
+
+      <TextView
+          android:padding="8dp"
+          android:id="@+id/contents"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+
+    </LinearLayout>
+  </ScrollView>
+
+</LinearLayout>

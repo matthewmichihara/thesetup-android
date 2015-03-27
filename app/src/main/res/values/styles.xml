@@ -2,8 +2,8 @@
   <!-- Base application theme. -->
   <style name="BaseAppTheme"
       parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="colorPrimary">@color/pink</item>
-    <item name="colorPrimaryDark">@color/pink</item>
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primaryDark</item>
     <item name="android:textColorPrimary">#ffffff</item>
     <item name="android:textViewStyle">@style/LightTextViewStyle</item>
   </style>
@@ -16,7 +16,7 @@
 
   <style name="HeaderTextAppearance"
       parent="@android:style/TextAppearance">
-    <item name="android:textColor">?colorPrimary</item>
+    <item name="android:textColor">?attr/colorPrimary</item>
     <item name="android:textSize">22sp</item>
   </style>
 

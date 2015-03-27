@@ -5,8 +5,6 @@ import android.support.annotation.Nullable;
 import auto.parcel.AutoParcel;
 import java.util.List;
 
-import static java.lang.String.format;
-
 @AutoParcel @AutoGson public abstract class Interview implements Parcelable {
   public abstract String slug();
 
@@ -24,7 +22,4 @@ import static java.lang.String.format;
 
   @Nullable public abstract Gear gear();
 
-  public String imageUrl() {
-    return format("http://usesthis.com/images/portraits/%s.jpg", slug());
-  }
 }

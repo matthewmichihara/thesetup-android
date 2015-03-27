@@ -15,7 +15,13 @@ import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 
 import static butterknife.ButterKnife.inject;
-import static com.fourpool.thesetup.InterviewActivity.*;
+import static com.fourpool.thesetup.InterviewActivity.VIEW_NAME_CATEGORIES;
+import static com.fourpool.thesetup.InterviewActivity.VIEW_NAME_DATE;
+import static com.fourpool.thesetup.InterviewActivity.VIEW_NAME_IMAGE;
+import static com.fourpool.thesetup.InterviewActivity.VIEW_NAME_NAME;
+import static com.fourpool.thesetup.InterviewActivity.VIEW_NAME_SUMMARY;
+import static com.fourpool.thesetup.TheSetupApp.objectGraph;
+import static com.fourpool.thesetup.Util.url;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class InterviewView extends FrameLayout {
@@ -53,7 +59,7 @@ public class InterviewView extends FrameLayout {
   public void setInterview(Interview interview) {
     this.interview = interview;
 
-    String imageUrl = interview.imageUrl();
+    String imageUrl = url(interview);
     picasso.load(imageUrl).placeholder(android.R.color.darker_gray).into(imageView);
 
     nameView.setText(interview.name());
@@ -74,8 +80,12 @@ public class InterviewView extends FrameLayout {
     Pair<View, String> sharedImage = new Pair<View, String>(imageView, VIEW_NAME_IMAGE);
     Pair<View, String> sharedSummary = new Pair<View, String>(summaryView, VIEW_NAME_SUMMARY);
     Pair<View, String> sharedDate = new Pair<View, String>(dateView, VIEW_NAME_DATE);
-    Pair<View, String> sharedCategories = new Pair<View, String>(categoriesView, VIEW_NAME_CATEGORIES);
+    Pair<View, String> sharedCategories =
+        new Pair<View, String>(categoriesView, VIEW_NAME_CATEGORIES);
+    Pair<View, String> sharedName = new Pair<View, String>(nameView, VIEW_NAME_NAME);
 
-    if (listener != null) listener.onClick(interview, sharedImage, sharedSummary, sharedDate, sharedCategories);
+    if (listener != null) {
+      listener.onClick(interview, sharedImage, sharedSummary, sharedDate, sharedCategories, sharedName);
+    }
   }
 }

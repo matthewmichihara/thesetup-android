@@ -28,6 +28,7 @@ dependencies {
     debugCompile 'com.facebook.stetho:stetho-okhttp:1.0.1'
     compile 'com.github.frankiesardo:auto-parcel:0.3'
     apt 'com.github.frankiesardo:auto-parcel-processor:0.3'
+    compile 'com.github.ksoichiro:android-observablescrollview:1.5.0'
     compile 'com.google.code.gson:gson:2.3.0'
     compile 'com.google.guava:guava:18.0'
     compile 'com.jakewharton:butterknife:6.1.0'

@@ -104,7 +104,7 @@
         android:maxLines="1"
         android:minHeight="?attr/actionBarSize"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
+        android:textSize="24sp"
         />
 
     <Space

@@ -36,6 +36,7 @@ public class InterviewActivity extends ActionBarActivity {
   public static final String VIEW_NAME_TOOLBAR = "toolbar";
 
   @Inject TheSetup theSetup;
+  @Inject Picasso picasso;
   @Inject Spanner spanner;
 
   @InjectView(R.id.toolbar) Toolbar toolbar;
@@ -63,7 +64,7 @@ public class InterviewActivity extends ActionBarActivity {
     setTitle(interview.name());
     setSupportActionBar(toolbar);
 
-    Picasso.with(this).load(interview.imageUrl()).into(imageView);
+    picasso.load(interview.imageUrl()).into(imageView);
 
     final Func1<InterviewResponse, Interview> map = new Func1<InterviewResponse, Interview>() {
       @Override public Interview call(InterviewResponse response) {

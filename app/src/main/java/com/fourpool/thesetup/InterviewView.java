@@ -12,12 +12,15 @@ import android.widget.TextView;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import com.squareup.picasso.Picasso;
+import javax.inject.Inject;
 
 import static butterknife.ButterKnife.inject;
 import static com.fourpool.thesetup.InterviewActivity.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class InterviewView extends FrameLayout {
+  @Inject Picasso picasso;
+
   @InjectView(R.id.image) ImageView imageView;
   @InjectView(R.id.name) TextView nameView;
   @InjectView(R.id.summary) TextView summaryView;
@@ -44,16 +47,14 @@ public class InterviewView extends FrameLayout {
 
     inflate(context, R.layout.view_interview, this);
     inject(this);
+    objectGraph(context).inject(this);
   }
 
   public void setInterview(Interview interview) {
     this.interview = interview;
 
     String imageUrl = interview.imageUrl();
-    Picasso.with(getContext())
-        .load(imageUrl)
-        .placeholder(android.R.color.darker_gray)
-        .into(imageView);
+    picasso.load(imageUrl).placeholder(android.R.color.darker_gray).into(imageView);
 
     nameView.setText(interview.name());
     summaryView.setText(interview.summary());

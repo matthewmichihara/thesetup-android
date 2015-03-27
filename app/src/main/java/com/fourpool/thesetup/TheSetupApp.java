@@ -2,7 +2,6 @@ package com.fourpool.thesetup;
 
 import android.app.Application;
 import android.content.Context;
-import com.crashlytics.android.Crashlytics;
 import dagger.ObjectGraph;
 
 public class TheSetupApp extends Application {
@@ -10,9 +9,9 @@ public class TheSetupApp extends Application {
 
   @Override public void onCreate() {
     super.onCreate();
-    Crashlytics.start(this);
 
-    objectGraph = ObjectGraph.create(new TheSetupModule());
+    AppInitializer.init(this);
+    objectGraph = ObjectGraph.create(Modules.list(this));
   }
 
   public static ObjectGraph objectGraph(Context context) {

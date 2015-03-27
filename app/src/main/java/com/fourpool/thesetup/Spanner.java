@@ -52,11 +52,7 @@ import javax.inject.Singleton;
         SpanInfo textStyleSpan =
             new SpanInfo(new TextAppearanceSpan(context, R.style.HeaderTextAppearance), spanStart, spanEnd,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        SpanInfo colorSpan =
-            new SpanInfo(new ForegroundColorSpan(context.getResources().getColor(R.color.pink)),
-                spanStart, spanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spanInfos.add(textStyleSpan);
-        //spanInfos.add(colorSpan);
 
         newContents = newContents.replaceFirst("#### .+?\\n\\n", matchedHeaderContents);
 

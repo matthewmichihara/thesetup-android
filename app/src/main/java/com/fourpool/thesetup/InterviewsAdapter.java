@@ -1,40 +1,34 @@
 package com.fourpool.thesetup;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import butterknife.InjectView;
-import java.util.Collections;
 import java.util.List;
-import rx.functions.Action1;
-
-import static butterknife.ButterKnife.inject;
 
 public class InterviewsAdapter extends RecyclerView.Adapter<InterviewsAdapter.ViewHolder>
-    implements InterviewView.Listener, Action1<List<Interview>> {
+    implements InterviewView.Listener {
   private final Context context;
-  private List<Interview> interviews = Collections.emptyList();
-  private Listener listener;
+  private final List<Interview> interviews;
+  private final Listener listener;
 
   public interface Listener {
     void onInterviewClick(Interview interview, Pair<View, String>... sharedElements);
   }
 
-  public InterviewsAdapter(Context context) {
+  public InterviewsAdapter(@NonNull Context context, @NonNull List<Interview> interviews,
+      @NonNull Listener listener) {
     this.context = context;
-  }
-
-  @Override public void call(List<Interview> interviews) {
     this.interviews = interviews;
-    notifyDataSetChanged();
+    this.listener = listener;
   }
 
   @Override public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-    View v = LayoutInflater.from(context).inflate(R.layout.list_item_interview, viewGroup, false);
+    InterviewView v = new InterviewView(context);
+    v.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT));
     return new ViewHolder(v);
   }
 
@@ -49,19 +43,16 @@ public class InterviewsAdapter extends RecyclerView.Adapter<InterviewsAdapter.Vi
   }
 
   @Override public void onClick(Interview interview, Pair<View, String>... sharedElements) {
-    if (listener != null) listener.onInterviewClick(interview, sharedElements);
-  }
-
-  public void setListener(Listener listener) {
-    this.listener = listener;
+    listener.onInterviewClick(interview, sharedElements);
   }
 
   static class ViewHolder extends RecyclerView.ViewHolder {
-    @InjectView(R.id.interview) InterviewView interviewView;
+    public final InterviewView interviewView;
 
-    public ViewHolder(View view) {
-      super(view);
-      inject(this, view);
+    public ViewHolder(InterviewView interviewView) {
+      super(interviewView);
+
+      this.interviewView = interviewView;
     }
   }
 }

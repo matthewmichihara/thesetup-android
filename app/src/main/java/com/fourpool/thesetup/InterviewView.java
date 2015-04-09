@@ -60,7 +60,11 @@ public class InterviewView extends FrameLayout {
     this.interview = interview;
 
     String imageUrl = url(interview);
-    picasso.load(imageUrl).placeholder(android.R.color.darker_gray).into(imageView);
+    picasso.load(imageUrl)
+        .fit()
+        .centerCrop()
+        .placeholder(android.R.color.darker_gray)
+        .into(imageView);
 
     nameView.setText(interview.name());
     summaryView.setText(interview.summary());
@@ -85,7 +89,8 @@ public class InterviewView extends FrameLayout {
     Pair<View, String> sharedName = new Pair<View, String>(nameView, VIEW_NAME_NAME);
 
     if (listener != null) {
-      listener.onClick(interview, sharedImage, sharedSummary, sharedDate, sharedCategories, sharedName);
+      listener.onClick(interview, sharedImage, sharedSummary, sharedDate, sharedCategories,
+          sharedName);
     }
   }
 }

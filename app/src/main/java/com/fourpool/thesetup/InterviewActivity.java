@@ -100,40 +100,25 @@ public class InterviewActivity extends ActionBarActivity
 
     final Action1<Interview> subscriber = new Action1<Interview>() {
       @Override public void call(final Interview interview) {
-        String contents = interview.contents();
-
-        Spanner.ProcessedContents processed =
-            spanner.process(InterviewActivity.this, contents, InterviewActivity.this);
-        List<Spanner.SpanInfo> spanInfos = processed.spanInfos;
-
-        Spannable interviewSpannable = new SpannableString(processed.contents);
-        for (Spanner.SpanInfo spanInfo : spanInfos) {
-          interviewSpannable.setSpan(spanInfo.span, spanInfo.start, spanInfo.end, spanInfo.flags);
-        }
-
-        contentsView.setText(interviewSpannable);
-        contentsView.setMovementMethod(LinkMovementMethod.getInstance());
-
-        summaryView.setText(interview.summary());
-        CharSequence date = DateUtils.getRelativeTimeSpanString(SECONDS.toMillis(interview.date()));
-        dateView.setText(date);
-        categoriesView.setText(TextUtils.join(" ", interview.categories()));
-
-        scrollView.setScrollViewCallbacks(InterviewActivity.this);
-
-        ScrollUtils.addOnGlobalLayoutListener(scrollView, new Runnable() {
-          @Override public void run() {
-            onScrollChanged(0, false, false);
-          }
-        });
+        updateInterview(interview);
       }
     };
 
-    theSetup.interview(slug)
-        .map(map)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(subscriber);
+    if (savedInstanceState != null) {
+      this.interview = savedInstanceState.getParcelable(EXTRA_INTERVIEW);
+      updateInterview(interview);
+    } else {
+      theSetup.interview(slug)
+          .map(map)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe(subscriber);
+    }
+  }
+
+  @Override protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putParcelable(EXTRA_INTERVIEW, interview);
   }
 
   @Override public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
@@ -206,5 +191,35 @@ public class InterviewActivity extends ActionBarActivity
         }
       }
     }
+  }
+
+  private void updateInterview(Interview updatedInterview) {
+    this.interview = updatedInterview;
+    String contents = interview.contents();
+
+    Spanner.ProcessedContents processed =
+        spanner.process(InterviewActivity.this, contents, InterviewActivity.this);
+    List<Spanner.SpanInfo> spanInfos = processed.spanInfos;
+
+    Spannable interviewSpannable = new SpannableString(processed.contents);
+    for (Spanner.SpanInfo spanInfo : spanInfos) {
+      interviewSpannable.setSpan(spanInfo.span, spanInfo.start, spanInfo.end, spanInfo.flags);
+    }
+
+    contentsView.setText(interviewSpannable);
+    contentsView.setMovementMethod(LinkMovementMethod.getInstance());
+
+    summaryView.setText(interview.summary());
+    CharSequence date = DateUtils.getRelativeTimeSpanString(SECONDS.toMillis(interview.date()));
+    dateView.setText(date);
+    categoriesView.setText(TextUtils.join(" ", interview.categories()));
+
+    scrollView.setScrollViewCallbacks(InterviewActivity.this);
+
+    ScrollUtils.addOnGlobalLayoutListener(scrollView, new Runnable() {
+      @Override public void run() {
+        onScrollChanged(0, false, false);
+      }
+    });
   }
 }
